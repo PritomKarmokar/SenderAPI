@@ -66,7 +66,7 @@ Access API documentation:
 02. [Enable the API](https://developers.google.com/gmail/api/quickstart/python#enable_the_api)
 
 03. [Configure the OAuth consent screen](https://developers.google.com/gmail/api/quickstart/python#configure_the_oauth_consent_screen)
-
+    - set the `User type` to External 
 04. [Authorize credentials for a desktop application](https://developers.google.com/gmail/api/quickstart/python#authorize_credentials_for_a_desktop_application)
 
 05. Finally store the 'credentials.json' in `code/api_credentials` directory
