@@ -8,14 +8,12 @@ from googleapiclient.errors import HttpError
 from email.message import EmailMessage
 
 # Constants
-# BASE_DIR = r"/code/api_credentials"
 BASE_DIR = "code/api_credentials"
 CREDENTIALS_PATH = os.path.join(BASE_DIR, "credentials.json")
 TOKEN_PATH = os.path.join(BASE_DIR, "token.json")
 
+# If modifying these scopes remove token.json file from TOKEN_PATH
 SCOPES = ['https://mail.google.com/']
-# SCOPES = ['https://www.googleapis.com/auth/gmail.send']
-
 
 class GmailApi:
     def __init__(self):

@@ -1,5 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime
-from datetime import datetime
+from sqlalchemy import Column, Integer, String
 from .db_setup import Base
 
 class User(Base):
@@ -8,7 +7,8 @@ class User(Base):
 
     Attributes:
         id (int): Primary key for the user.
-        username (str): User's username.
+        firstname (str): User's firstname.
+        lastname (str): User's lastname
         email (str): User's email address (should be unique).
     """
     

@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, BackgroundTasks, HTTPException
+from fastapi import FastAPI, Depends, BackgroundTasks, HTTPException, status
 from sqlalchemy.orm import Session
 
 from .database import models, schemas
@@ -6,8 +6,6 @@ from .database.db_setup import engine
 from .deps import get_db, get_gmail_api
 from .api import GmailApi
 from .crud import *
-# Create the database tables
-models.Base.metadata.create_all(bind=engine)
 
 description = """
 SenderApi helps you to send Email notification when a new user registers. 🚀
@@ -17,6 +15,11 @@ SenderApi helps you to send Email notification when a new user registers. 🚀
 You will be able to:
 * **Register users**
 """
+
+
+# Create the database tables
+models.Base.metadata.create_all(bind=engine)
+
 
 app = FastAPI(
     title="SenderApi",
@@ -31,8 +34,9 @@ def root():
     }
 
 
-@app.post("/register/", response_model=schemas.User)
+@app.post("/register", response_model=schemas.User, status_code=status.HTTP_201_CREATED)
 def register_user(user: schemas.UserCreate,  background_tasks: BackgroundTasks, db: Session = Depends(get_db), service: GmailApi = Depends(get_gmail_api)):
+    
     """
     Endpoint to register a new user.
 
@@ -63,3 +67,14 @@ def register_user(user: schemas.UserCreate,  background_tasks: BackgroundTasks, 
     )
 
     return new_user
+
+@app.delete("/users/{email}")
+def delete_user_by_email(email: EmailStr, db: Session = Depends(get_db)):
+    db_user = get_user_by_email(db, emailAddress=email)
+
+    if db_user:
+        db.delete(db_user)
+        db.commit()
+        return {"message": "User deleted successfully"}
+    else:
+        raise HTTPException(status_code=404, detail="User not found")
