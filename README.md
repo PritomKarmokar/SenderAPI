@@ -75,4 +75,5 @@ Access API documentation:
 
 When a user registers through the API, a welcome email will be sent using the Gmail API. The endpoint for registration is:
 
-- **POST /register**: This endpoint takes the user's username and email address and saves it to the database, then sends a welcome email using Gmail API.
+- **POST /register**: This endpoint takes the user's firstname,
+lastname (optional) and email address and saves it to the database, then sends a welcome email using Gmail API.
