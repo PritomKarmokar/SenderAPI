@@ -41,7 +41,7 @@ Ensure you have Docker and docker-compose installed on your machine.
 
 1. Build and run the Docker containers:
    ```bash
-   docker-compose up --build
+   docker compose up --build
    ```
 
 ## Usage
