@@ -59,4 +59,13 @@ def register_user(user: schemas.UserCreate,  background_tasks: BackgroundTasks, 
 
     return new_user
 
+@app.delete("/users/{email}")
+def delete_user_by_email(email: EmailStr, db: Session = Depends(get_db)):
+    db_user = get_user_by_email(db, emailAddress=email)
 
+    if db_user:
+        db.delete(db_user)
+        db.commit()
+        return {"message": "User deleted successfully"}
+    else:
+        raise HTTPException(status_code=404, detail="User not found")

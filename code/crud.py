@@ -56,5 +56,6 @@ async def send_notification(service: GmailApi, emailAddress: EmailStr):
     
     try:
         service.send_email(emailAddress, subject=subject, body=body)
+        print("Email sent successfully")
     except Exception as error:
         print(f"Error : {error}")
